@@ -1,6 +1,101 @@
-<a routerLink="/admin/master-data">Master Data</a>&nbsp;
-<a routerLink="/admin/user-configuration">User Configuration</a>&nbsp;
-<a routerLink="/auth/register">Register</a>&nbsp;
-<a routerLink="/auth/login">Login</a>
-<router-outlet></router-outlet>
-<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Toolbar icon-button with menu icon"
+    (click)="drawer.toggle()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>Recruitment Portal</span>
+  <span class="toolbar-spacer"></span>
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    class="toolbar-icon settings-icon"
+    aria-label="Toolbar icon-button with cog icon"
+  >
+    <mat-icon>settings</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/auth/register">
+      <mat-icon>assignment</mat-icon>
+      Register
+    </a>
+    <a mat-menu-item routerLink="/auth/login">
+      <mat-icon>arrow_forward</mat-icon>
+      Login
+    </a>
+  </mat-menu>
+  <!-- <button
+    mat-icon-button
+    class="toolbar-icon"
+    aria-label="Toolbar icon-button with share icon"
+  >
+    <mat-icon>share</mat-icon>
+  </button> -->
+</mat-toolbar>
+
+<!-- <ng-container>
+  <mat-sidenav-container class="example-container">
+    <mat-sidenav
+      #sidenav
+      mode="side"
+      opened
+      class="example-sidenav"
+      [fixedInViewport]="false"
+      [fixedTopGap]="0"
+      [fixedBottomGap]="0"
+    >
+      <a routerLink="/admin/master-data">Master Data</a>&nbsp;
+      <a routerLink="/admin/user-configuration">User Configuration</a>&nbsp;
+      <a routerLink="/auth/register">Register</a>&nbsp;
+      <a routerLink="/auth/login">Login</a>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <mat-toolbar class="example-footer">Footer</mat-toolbar>
+</ng-container> -->
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side" opened="true">
+    <div>
+      <a
+        class="nav-link"
+        mat-flat-button
+        routerLink="/admin/master-data"
+        routerLinkActive="active-nav"
+      >
+        <mat-icon>dvr</mat-icon>
+        Master Data
+      </a>
+    </div>
+    <div>
+      <a
+        class="nav-link"
+        mat-flat-button
+        routerLink="/admin/user-configuration"
+        routerLinkActive="active-nav"
+      >
+        <mat-icon>supervisor_account</mat-icon>
+        User Configuration</a
+      >
+    </div>
+    <div>
+      <a
+        class="nav-link"
+        mat-flat-button
+        routerLink="/candidates/list"
+        routerLinkActive="active-nav"
+        ><mat-icon>list</mat-icon>Candidates</a
+      >
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
