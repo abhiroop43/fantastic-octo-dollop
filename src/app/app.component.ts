@@ -1,17 +1,31 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { MatDrawer } from '@angular/material/sidenav';
+import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
-  title = 'recruitment-ui';
+export class AppComponent implements OnInit {
+  isDarkTheme: Observable<boolean> | undefined;
 
-  @ViewChild('drawer', { read: ElementRef }) myTestDiv!: ElementRef<MatDrawer>;
+  constructor(
+    private themeService: ThemeService,
+    private overlay: OverlayContainer
+  ) {}
 
-  ngAfterViewInit(): void {
-    console.log(this.myTestDiv.nativeElement);
+  ngOnInit(): void {
+    this.isDarkTheme = this.themeService.isDarkTheme;
+  }
+
+  toggleDarkTheme(checked: boolean) {
+    this.themeService.setDarkTheme(checked);
+    if (checked) {
+      this.overlay.getContainerElement().classList.add('dark-theme');
+    } else {
+      this.overlay.getContainerElement().classList.remove('dark-theme');
+    }
   }
 }
