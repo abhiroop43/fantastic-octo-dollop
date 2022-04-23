@@ -10,7 +10,7 @@ import { ThemeService } from './services/theme.service';
 })
 export class AppComponent implements OnInit {
   isDarkTheme: Observable<boolean> | undefined;
-
+  darkClassName = 'dark-theme';
   constructor(
     private themeService: ThemeService,
     private overlay: OverlayContainer
@@ -23,9 +23,9 @@ export class AppComponent implements OnInit {
   toggleDarkTheme(checked: boolean) {
     this.themeService.setDarkTheme(checked);
     if (checked) {
-      this.overlay.getContainerElement().classList.add('dark-theme');
+      this.overlay.getContainerElement().classList.add(this.darkClassName);
     } else {
-      this.overlay.getContainerElement().classList.remove('dark-theme');
+      this.overlay.getContainerElement().classList.remove(this.darkClassName);
     }
   }
 }
