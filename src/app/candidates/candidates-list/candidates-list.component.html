@@ -1,1 +1,41 @@
-<p>candidates-list works!</p>
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. John" #input />
+</mat-form-field>
+
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8 candidates-table"
+>
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="cv_received_date">
+    <th mat-header-cell *matHeaderCellDef>CV Received On</th>
+    <td mat-cell *matCellDef="let element">{{ element.cv_received_date }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="availability_in">
+    <th mat-header-cell *matHeaderCellDef>Notice Period</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.availability_in }} days
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
